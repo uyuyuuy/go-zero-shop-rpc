@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+package pb;
+
+
+message Product {
+  uint64 ProductId = 1;
+  int64 ProductName = 2;
+  uint64 Number = 3;
+}
+
+message UpdateProductReq {
+  uint64 ProductId = 1;
+  uint64 Type = 2;
+  uint64 Number = 3;
+}
+
+message UpdateResp {
+  uint64 Number = 1;
+
+}
+
+
+service product {
+  rpc updateProduct(UpdateProductReq) returns (UpdateResp);
+
+}

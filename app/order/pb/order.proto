@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+package pb;
+
+
+message Order {
+  uint64 OrderId = 1;
+  int64 ProductId = 2;
+  uint64 Number = 3;
+  uint64 UserId = 4;
+}
+
+message CreateOrderReq {
+  uint64 ProductId = 1;
+  uint64 Type = 2;
+  uint64 Number = 3;
+}
+
+message CreateOrderResp {
+  uint64 Number = 1;
+
+}
+
+
+service order {
+  rpc createOrder(CreateOrderReq) returns (CreateOrderResp);
+
+}
