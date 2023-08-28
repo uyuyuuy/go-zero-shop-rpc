@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"github.com/uyuyuuy/go-zero-shop-rpc/app/cart/rpc/internal/logic"
-	"github.com/uyuyuuy/go-zero-shop-rpc/app/cart/rpc/internal/svc"
-	"github.com/uyuyuuy/go-zero-shop-rpc/app/cart/rpc/pb"
+	"github.com/uyuyuuy/go-zero-shop-rpc/app/cart/internal/logic"
+	"github.com/uyuyuuy/go-zero-shop-rpc/app/cart/internal/svc"
+	"github.com/uyuyuuy/go-zero-shop-rpc/app/cart/pb"
 )
 
 type CartServer struct {

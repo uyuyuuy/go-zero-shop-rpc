@@ -3,8 +3,8 @@ package logic
 import (
 	"context"
 
-	"github.com/uyuyuuy/go-zero-shop-rpc/app/cart/rpc/internal/svc"
-	"github.com/uyuyuuy/go-zero-shop-rpc/app/cart/rpc/pb"
+	"github.com/uyuyuuy/go-zero-shop-rpc/app/cart/internal/svc"
+	"github.com/uyuyuuy/go-zero-shop-rpc/app/cart/pb"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

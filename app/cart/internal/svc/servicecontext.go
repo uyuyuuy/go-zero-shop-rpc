@@ -1,6 +1,6 @@
 package svc
 
-import "github.com/uyuyuuy/go-zero-shop-rpc/app/cart/rpc/internal/config"
+import "github.com/uyuyuuy/go-zero-shop-rpc/app/cart/internal/config"
 
 type ServiceContext struct {
 	Config config.Config

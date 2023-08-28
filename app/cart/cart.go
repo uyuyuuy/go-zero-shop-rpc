@@ -4,10 +4,10 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/uyuyuuy/go-zero-shop-rpc/app/cart/rpc/internal/config"
-	"github.com/uyuyuuy/go-zero-shop-rpc/app/cart/rpc/internal/server"
-	"github.com/uyuyuuy/go-zero-shop-rpc/app/cart/rpc/internal/svc"
-	"github.com/uyuyuuy/go-zero-shop-rpc/app/cart/rpc/pb"
+	"github.com/uyuyuuy/go-zero-shop-rpc/app/cart/internal/config"
+	"github.com/uyuyuuy/go-zero-shop-rpc/app/cart/internal/server"
+	"github.com/uyuyuuy/go-zero-shop-rpc/app/cart/internal/svc"
+	"github.com/uyuyuuy/go-zero-shop-rpc/app/cart/pb"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"
