@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+package pb;
+
+
+message Cart {
+  int64 id = 1;
+  int64 userId = 2;
+  int64 productId = 3;
+  string productName = 4;
+  int64 number = 5;
+
+}
+
+message CartListReq {
+  int64 userId = 1;
+}
+
+
+message CartListResp {
+  repeated Cart list = 1;   //列表
+}
+
+
+message AddCartReq {
+  int64 userId = 1;
+  int64 productId = 2;
+  string productName = 3;
+  int64 number =4;
+}
+
+message AddCartResp {
+  int64 id = 1;
+}
+
+message UpdateCartReq {
+  int64 id = 1;
+  int64 number = 2;
+}
+
+message UpdateCartResp {
+  Cart cart = 1;
+}
+
+message DelCartReq {
+  int64 id = 1;
+}
+
+message DelCartResp {
+  int64 id = 1;
+}
+
+service cart {
+  rpc cartList(CartListReq)returns(CartListResp);
+
+  rpc addCart(AddCartReq)returns(AddCartResp);
+
+  rpc updateCart(UpdateCartReq)returns(UpdateCartResp);
+
+  rpc delCart(DelCartReq)returns(DelCartResp);
+}
+
+
