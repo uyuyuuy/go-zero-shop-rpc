@@ -1,6 +1,8 @@
 Name: product.rpc
-ListenOn: 0.0.0.0:8080
-Etcd:
-  Hosts:
-  - 127.0.0.1:2379
-  Key: product.rpc
+ListenOn: 0.0.0.0:8081
+#Etcd:
+#  Hosts:
+#  - 127.0.0.1:2379
+#  Key: product.rpc
+
+MysqlDsn: "root:123456@tpc()/order?charset=utf8mb4&parseTime=True&loc=Local"

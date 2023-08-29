@@ -1,6 +1,8 @@
 Name: order.rpc
 ListenOn: 0.0.0.0:8080
-Etcd:
-  Hosts:
-  - 127.0.0.1:2379
-  Key: order.rpc
+#Etcd:
+#  Hosts:
+#  - 127.0.0.1:2379
+#  Key: order.rpc
+
+MysqlDsn: "root:123456@tpc()/order?charset=utf8mb4&parseTime=True&loc=Local"

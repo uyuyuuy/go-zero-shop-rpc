@@ -13,13 +13,14 @@ message Order {
 }
 
 message CreateOrderReq {
-  uint64 ProductId = 1;
-  uint64 Type = 2;
+  string OrderId = 1;
+  uint64 ProductId = 2;
   uint64 Number = 3;
+  uint64 UserId = 4;
 }
 
 message CreateOrderResp {
-  uint64 Number = 1;
+  string OrderId = 1;
 
 }
 
