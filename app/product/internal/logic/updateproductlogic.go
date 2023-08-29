@@ -3,6 +3,8 @@ package logic
 import (
 	"context"
 	"database/sql"
+	"fmt"
+	"github.com/dtm-labs/client/dtmcli"
 	"github.com/dtm-labs/client/dtmgrpc"
 	"github.com/uyuyuuy/go-zero-shop-rpc/app/product/internal/model"
 	"github.com/uyuyuuy/go-zero-shop-rpc/app/product/internal/svc"
@@ -32,7 +34,7 @@ func (l *UpdateProductLogic) UpdateProduct(in *pb.UpdateProductReq) (*pb.UpdateR
 	var product model.Product
 	err := l.svcCtx.Db.QueryRow(&product, "select * from product where id = ? for update;", in.ProductId)
 	if err != nil {
-		return &pb.UpdateResp{}, err
+		return nil, status.Error(codes.Aborted, dtmcli.ResultFailure)
 	}
 	number := product.Number + in.Number
 
@@ -41,12 +43,20 @@ func (l *UpdateProductLogic) UpdateProduct(in *pb.UpdateProductReq) (*pb.UpdateR
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
-	barrier.CallWithDB(l.svcCtx.Db.RawDB(), func(tx *sql.Tx) error {
-
-	})
-	_, updateErr := l.svcCtx.Db.Exec("update product set number = ?", number)
-	if updateErr != nil {
-		return &pb.UpdateResp{}, updateErr
+	db, err := l.svcCtx.Db.RawDB()
+	if dtmErr := barrier.CallWithDB(db, func(tx *sql.Tx) error {
+		res, updateErr := tx.Exec("update product set number = ?", number)
+		if updateErr != nil {
+			return fmt.Errorf("更新库存失败 err :%v", updateErr)
+		}
+		rows, _ := res.RowsAffected()
+		if rows != 1 {
+			return fmt.Errorf("更新记录数量错误，%d", rows)
+		}
+		return nil
+	}); dtmErr != nil {
+		return nil, status.Error(codes.Aborted, dtmcli.ResultFailure)
 	}
+
 	return &pb.UpdateResp{Number: number}, nil
 }
