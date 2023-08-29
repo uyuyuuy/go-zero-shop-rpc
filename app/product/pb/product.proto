@@ -26,4 +26,6 @@ message UpdateResp {
 service product {
   rpc updateProduct(UpdateProductReq) returns (UpdateResp);
 
+  rpc updateProductRollback(UpdateProductReq) returns (UpdateResp);
+
 }

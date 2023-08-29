@@ -19,6 +19,7 @@ type (
 
 	ProductZrpcClient interface {
 		UpdateProduct(ctx context.Context, in *UpdateProductReq, opts ...grpc.CallOption) (*UpdateResp, error)
+		UpdateProductRollback(ctx context.Context, in *UpdateProductReq, opts ...grpc.CallOption) (*UpdateResp, error)
 	}
 
 	defaultProductZrpcClient struct {
@@ -35,4 +36,9 @@ func NewProductZrpcClient(cli zrpc.Client) ProductZrpcClient {
 func (m *defaultProductZrpcClient) UpdateProduct(ctx context.Context, in *UpdateProductReq, opts ...grpc.CallOption) (*UpdateResp, error) {
 	client := pb.NewProductClient(m.cli.Conn())
 	return client.UpdateProduct(ctx, in, opts...)
+}
+
+func (m *defaultProductZrpcClient) UpdateProductRollback(ctx context.Context, in *UpdateProductReq, opts ...grpc.CallOption) (*UpdateResp, error) {
+	client := pb.NewProductClient(m.cli.Conn())
+	return client.UpdateProductRollback(ctx, in, opts...)
 }

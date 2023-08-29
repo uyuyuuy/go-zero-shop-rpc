@@ -26,3 +26,8 @@ func (s *ProductServer) UpdateProduct(ctx context.Context, in *pb.UpdateProductR
 	l := logic.NewUpdateProductLogic(ctx, s.svcCtx)
 	return l.UpdateProduct(in)
 }
+
+func (s *ProductServer) UpdateProductRollback(ctx context.Context, in *pb.UpdateProductReq) (*pb.UpdateResp, error) {
+	l := logic.NewUpdateProductRollbackLogic(ctx, s.svcCtx)
+	return l.UpdateProductRollback(in)
+}

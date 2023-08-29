@@ -19,6 +19,7 @@ type (
 
 	OrderZrpcClient interface {
 		CreateOrder(ctx context.Context, in *CreateOrderReq, opts ...grpc.CallOption) (*CreateOrderResp, error)
+		CreateOrderRollback(ctx context.Context, in *CreateOrderReq, opts ...grpc.CallOption) (*CreateOrderResp, error)
 	}
 
 	defaultOrderZrpcClient struct {
@@ -35,4 +36,9 @@ func NewOrderZrpcClient(cli zrpc.Client) OrderZrpcClient {
 func (m *defaultOrderZrpcClient) CreateOrder(ctx context.Context, in *CreateOrderReq, opts ...grpc.CallOption) (*CreateOrderResp, error) {
 	client := pb.NewOrderClient(m.cli.Conn())
 	return client.CreateOrder(ctx, in, opts...)
+}
+
+func (m *defaultOrderZrpcClient) CreateOrderRollback(ctx context.Context, in *CreateOrderReq, opts ...grpc.CallOption) (*CreateOrderResp, error) {
+	client := pb.NewOrderClient(m.cli.Conn())
+	return client.CreateOrderRollback(ctx, in, opts...)
 }

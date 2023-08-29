@@ -28,4 +28,6 @@ message CreateOrderResp {
 service order {
   rpc createOrder(CreateOrderReq) returns (CreateOrderResp);
 
+  rpc createOrderRollback(CreateOrderReq) returns (CreateOrderResp);
+
 }

@@ -19,7 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Product_UpdateProduct_FullMethodName = "/pb.product/updateProduct"
+	Product_UpdateProduct_FullMethodName         = "/pb.product/updateProduct"
+	Product_UpdateProductRollback_FullMethodName = "/pb.product/updateProductRollback"
 )
 
 // ProductClient is the client API for Product service.
@@ -27,6 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProductClient interface {
 	UpdateProduct(ctx context.Context, in *UpdateProductReq, opts ...grpc.CallOption) (*UpdateResp, error)
+	UpdateProductRollback(ctx context.Context, in *UpdateProductReq, opts ...grpc.CallOption) (*UpdateResp, error)
 }
 
 type productClient struct {
@@ -46,11 +48,21 @@ func (c *productClient) UpdateProduct(ctx context.Context, in *UpdateProductReq,
 	return out, nil
 }
 
+func (c *productClient) UpdateProductRollback(ctx context.Context, in *UpdateProductReq, opts ...grpc.CallOption) (*UpdateResp, error) {
+	out := new(UpdateResp)
+	err := c.cc.Invoke(ctx, Product_UpdateProductRollback_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProductServer is the server API for Product service.
 // All implementations must embed UnimplementedProductServer
 // for forward compatibility
 type ProductServer interface {
 	UpdateProduct(context.Context, *UpdateProductReq) (*UpdateResp, error)
+	UpdateProductRollback(context.Context, *UpdateProductReq) (*UpdateResp, error)
 	mustEmbedUnimplementedProductServer()
 }
 
@@ -60,6 +72,9 @@ type UnimplementedProductServer struct {
 
 func (UnimplementedProductServer) UpdateProduct(context.Context, *UpdateProductReq) (*UpdateResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateProduct not implemented")
+}
+func (UnimplementedProductServer) UpdateProductRollback(context.Context, *UpdateProductReq) (*UpdateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProductRollback not implemented")
 }
 func (UnimplementedProductServer) mustEmbedUnimplementedProductServer() {}
 
@@ -92,6 +107,24 @@ func _Product_UpdateProduct_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Product_UpdateProductRollback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductServer).UpdateProductRollback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Product_UpdateProductRollback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductServer).UpdateProductRollback(ctx, req.(*UpdateProductReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Product_ServiceDesc is the grpc.ServiceDesc for Product service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -102,6 +135,10 @@ var Product_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "updateProduct",
 			Handler:    _Product_UpdateProduct_Handler,
+		},
+		{
+			MethodName: "updateProductRollback",
+			Handler:    _Product_UpdateProductRollback_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

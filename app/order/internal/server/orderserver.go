@@ -26,3 +26,8 @@ func (s *OrderServer) CreateOrder(ctx context.Context, in *pb.CreateOrderReq) (*
 	l := logic.NewCreateOrderLogic(ctx, s.svcCtx)
 	return l.CreateOrder(in)
 }
+
+func (s *OrderServer) CreateOrderRollback(ctx context.Context, in *pb.CreateOrderReq) (*pb.CreateOrderResp, error) {
+	l := logic.NewCreateOrderRollbackLogic(ctx, s.svcCtx)
+	return l.CreateOrderRollback(in)
+}
