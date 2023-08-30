@@ -5,4 +5,4 @@ ListenOn: 0.0.0.0:8081
 #  - 127.0.0.1:2379
 #  Key: product.rpc
 
-MysqlDsn: "root:123456@tpc()/order?charset=utf8mb4&parseTime=True&loc=Local"
+MysqlDsn: "root:123456@tcp(192.168.109.128:3306)/product?charset=utf8mb4&parseTime=True&loc=Local"

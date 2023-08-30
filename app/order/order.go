@@ -3,9 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"os"
-	"runtime"
-
 	"github.com/uyuyuuy/go-zero-shop-rpc/app/order/internal/config"
 	"github.com/uyuyuuy/go-zero-shop-rpc/app/order/internal/server"
 	"github.com/uyuyuuy/go-zero-shop-rpc/app/order/internal/svc"
@@ -21,8 +18,6 @@ import (
 var configFile = flag.String("f", "etc/order.yaml", "the config file")
 
 func main() {
-	fmt.Println(runtime.NumCPU())
-	os.Exit(0)
 	flag.Parse()
 
 	var c config.Config
